@@ -67,7 +67,7 @@ public:
         {
             setContentOwned (new MainContentComponent(), true);
 
-            centreWithSize (getWidth(), getHeight());
+            centreWithSize (getWidth()- 150, getHeight());
             setVisible (true);
         }
 

@@ -10,7 +10,7 @@
 #define MAINCOMPONENT_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "AudioStream.h"
+#include "AudioEngine.h"
 
 
 //==============================================================================
@@ -19,7 +19,8 @@
     your controls and content.
 */
 class MainContentComponent   : public Component,
-                                public ButtonListener
+                                public ButtonListener,
+                                public SliderListener
 {
 public:
     //==============================================================================
@@ -30,15 +31,18 @@ public:
     void resized();
     
     void buttonClicked(Button* buttonThatWasClicked) override;
+    
+    void sliderValueChanged(Slider* slider) override;
 
 private:
     //==============================================================================
     
-    ScopedPointer<AudioDeviceManager>   deviceManager;
     
     ScopedPointer<TextButton>   audioToggleButton;
+    ScopedPointer<TextButton>   audioFileToggleButton;
+    ScopedPointer<Slider>       playBackRate;
     
-    ScopedPointer<AudioStream>  liveAudioStream;
+    ScopedPointer<AudioEngine>  audioEngine;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainContentComponent)
 };

@@ -175,9 +175,9 @@ static void setStateForAllBussesOfType (Vst::IComponent* component,
 
 //==============================================================================
 /** Assigns a complete AudioSampleBuffer's channels to an AudioBusBuffers' */
-static void associateWholeBufferTo (Vst::AudioBusBuffers& vstBuffers, const AudioSampleBuffer& buffer) noexcept
+static void associateWholeBufferTo (Vst::AudioBusBuffers& vstBuffers, AudioSampleBuffer& buffer) noexcept
 {
-    vstBuffers.channelBuffers32 = buffer.getArrayOfChannels();
+    vstBuffers.channelBuffers32 = buffer.getArrayOfWritePointers();
     vstBuffers.numChannels      = buffer.getNumChannels();
     vstBuffers.silenceFlags     = 0;
 }
@@ -223,6 +223,8 @@ static void toProcessContext (Vst::ProcessContext& context, AudioPlayHead* playH
                     context.frameRate.flags |= FrameRate::kPullDownRate;
             }
             break;
+
+            case AudioPlayHead::fpsUnknown: break;
 
             default:    jassertfalse; break; // New frame rate?
         }
@@ -532,14 +534,14 @@ public:
             return kResultOk;
         }
 
-        TEST_FOR_AND_RETURN_IF_VALID (Vst::IComponentHandler)
-        TEST_FOR_AND_RETURN_IF_VALID (Vst::IComponentHandler2)
-        TEST_FOR_AND_RETURN_IF_VALID (Vst::IComponentHandler3)
-        TEST_FOR_AND_RETURN_IF_VALID (Vst::IContextMenuTarget)
-        TEST_FOR_AND_RETURN_IF_VALID (Vst::IHostApplication)
-        TEST_FOR_AND_RETURN_IF_VALID (Vst::IParamValueQueue)
-        TEST_FOR_AND_RETURN_IF_VALID (Vst::IUnitHandler)
-        TEST_FOR_COMMON_BASE_AND_RETURN_IF_VALID (FUnknown, Vst::IComponentHandler)
+        TEST_FOR_AND_RETURN_IF_VALID (iid, Vst::IComponentHandler)
+        TEST_FOR_AND_RETURN_IF_VALID (iid, Vst::IComponentHandler2)
+        TEST_FOR_AND_RETURN_IF_VALID (iid, Vst::IComponentHandler3)
+        TEST_FOR_AND_RETURN_IF_VALID (iid, Vst::IContextMenuTarget)
+        TEST_FOR_AND_RETURN_IF_VALID (iid, Vst::IHostApplication)
+        TEST_FOR_AND_RETURN_IF_VALID (iid, Vst::IParamValueQueue)
+        TEST_FOR_AND_RETURN_IF_VALID (iid, Vst::IUnitHandler)
+        TEST_FOR_COMMON_BASE_AND_RETURN_IF_VALID (iid, FUnknown, Vst::IComponentHandler)
 
         *obj = nullptr;
         return kNotImplemented;
@@ -1634,7 +1636,11 @@ public:
 
     bool hasEditor() const override
     {
-        ComSmartPtr<IPlugView> view (tryCreatingView()); //N.B.: Must use a ComSmartPtr to not delete the view from the plugin permanently!
+        // (if possible, avoid creating a second instance of the editor, because that crashes some plugins)
+        if (getActiveEditor() != nullptr)
+            return true;
+
+        ComSmartPtr<IPlugView> view (tryCreatingView());
         return view != nullptr;
     }
 
@@ -1717,7 +1723,7 @@ public:
 
         if (head != nullptr)
         {
-            ScopedPointer<Steinberg::MemoryStream> s (createMemoryStreamForState (*head, "IComponent"));
+            ComSmartPtr<Steinberg::MemoryStream> s (createMemoryStreamForState (*head, "IComponent"));
 
             if (s != nullptr && component != nullptr)
                 component->setState (s);
