@@ -12,24 +12,7 @@
 #define DELAY_H_INCLUDED
 
 #include "RingBuffer.h"
-
-enum Error_t
-{
-    kNoError,
-    
-    kFileOpenError,
-    kFileAccessError,
-    
-    kFunctionInvalidArgsError,
-    
-    kNotInitializedError,
-    
-    kMemError,
-    
-    kUnknownError,
-    
-    kNumErrors
-};
+#include "ErrorDef.h"
 
 class CDelay
 {

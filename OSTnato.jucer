@@ -12,6 +12,15 @@
         <FILE id="M0HwOB" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       </GROUP>
       <GROUP id="{61767F78-2EF0-DF04-378F-26A770F48635}" name="Audio">
+        <FILE id="UX6cHx" name="Robot.cpp" compile="1" resource="0" file="Source/Robot.cpp"/>
+        <FILE id="biXyWD" name="Robot.h" compile="0" resource="0" file="Source/Robot.h"/>
+        <FILE id="LdzG1z" name="ErrorDef.h" compile="0" resource="0" file="../../ProjectTemplate/SharedSources/incl/ErrorDef.h"/>
+        <FILE id="wrAHum" name="rvfft.cpp" compile="1" resource="0" file="../../ProjectTemplate/3rdPartyLibs/Fft/rvfft.cpp"/>
+        <FILE id="Anq5U4" name="rvfft.h" compile="0" resource="0" file="../../ProjectTemplate/3rdPartyLibs/Fft/rvfft.h"/>
+        <FILE id="VKVpGg" name="Fft.cpp" compile="1" resource="0" file="../../ProjectTemplate/SharedSources/Dsp/Fft.cpp"/>
+        <FILE id="fAhxSt" name="Fft.h" compile="0" resource="0" file="../../ProjectTemplate/SharedSources/Dsp/Fft.h"/>
+        <FILE id="KnYdWr" name="TimeStretch.cpp" compile="1" resource="0" file="Source/TimeStretch.cpp"/>
+        <FILE id="COIHjs" name="TimeStretch.h" compile="0" resource="0" file="Source/TimeStretch.h"/>
         <FILE id="XSfcXr" name="AudioFileStream.cpp" compile="1" resource="0"
               file="Source/AudioFileStream.cpp"/>
         <FILE id="AMqrG5" name="AudioFileStream.h" compile="0" resource="0"

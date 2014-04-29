@@ -33,6 +33,8 @@ public:
     void loadAudioFile(String filePath);
     void setPlayBackRate(double ratio);
     
+    void toggleEffect(int iEffect);
+    
 private:
     
     ScopedPointer<AudioDeviceManager>   deviceManager;

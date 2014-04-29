@@ -15,6 +15,13 @@
 #define NUM_INPUT_CHANNELS          2
 #define NUM_OUTPUT_CHANNELS         2
 
+enum EffectsList
+{
+    kDelay,
+    kRobot,
+    
+    kTotalEffects
+};
 
 
 #endif  // MACROS_H_INCLUDED

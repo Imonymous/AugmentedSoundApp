@@ -13,6 +13,7 @@
 
 #include "JuceHeader.h"
 #include "Delay.h"
+#include "Robot.h"
 
 class AudioStream   :   public AudioIODeviceCallback
 {
@@ -23,6 +24,7 @@ public:
     ~AudioStream();
     
     CDelay *m_pCDelay;
+    CRobot *m_pCRobot;
     
     void audioDeviceAboutToStart (AudioIODevice* device) override;
     void audioDeviceStopped() override;
@@ -30,8 +32,12 @@ public:
                                 float** outputChannelData, int numOutputChannels,
                                 int numSamples) override;
     
+    void toggleEffect(int iEffect);
+    
 private:
     
+    bool isDelayOn;
+    bool isRobotOn;
 };
 
 

@@ -37,9 +37,13 @@ public:
 private:
     //==============================================================================
     
-    
     ScopedPointer<TextButton>   audioToggleButton;
     ScopedPointer<TextButton>   audioFileToggleButton;
+    ScopedPointer<TextButton>   recordButton;
+    ScopedPointer<TextButton>   playTimeStretchButton;
+    ScopedPointer<TextButton>   delayToggleButton;
+    ScopedPointer<TextButton>   robotToggleButton;
+    
     ScopedPointer<Slider>       playBackRate;
     
     ScopedPointer<AudioEngine>  audioEngine;

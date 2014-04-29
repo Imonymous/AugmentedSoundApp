@@ -27,9 +27,7 @@ AudioEngine::~AudioEngine()
     audioStream     =   nullptr;
     fileStream      =   nullptr;
     deviceManager   =   nullptr;
-    
 }
-
 
 void AudioEngine::startLiveStreaming()
 {
@@ -59,4 +57,9 @@ void AudioEngine::loadAudioFile(String filePath)
 void AudioEngine::setPlayBackRate(double ratio)
 {
     fileStream->setPlayBackRate(ratio);
+}
+
+void AudioEngine::toggleEffect(int iEffect)
+{
+    audioStream->toggleEffect(iEffect);
 }

@@ -7,6 +7,7 @@
 */
 
 #include "MainComponent.h"
+#include "Macros.h"
 
 
 //==============================================================================
@@ -32,8 +33,41 @@ MainContentComponent::MainContentComponent()
     audioFileToggleButton->setClickingTogglesState(true);
     audioFileToggleButton->addListener(this);
     
+    addAndMakeVisible (recordButton = new TextButton ("recordButton"));
+    recordButton->setButtonText (TRANS("Audio Record"));
+    recordButton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight);
+    recordButton->setColour (TextButton::buttonColourId, Colour (0xff3b3b3b));
+    recordButton->setColour (TextButton::buttonOnColourId, Colour (0xff797979));
+    recordButton->setClickingTogglesState(true);
+    recordButton->addListener(this);
+    
+    addAndMakeVisible (playTimeStretchButton = new TextButton ("playTimeStretchButton"));
+    playTimeStretchButton->setButtonText (TRANS("Play Stretch"));
+    playTimeStretchButton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight);
+    playTimeStretchButton->setColour (TextButton::buttonColourId, Colour (0xff3b3b3b));
+    playTimeStretchButton->setColour (TextButton::buttonOnColourId, Colour (0xff797979));
+    playTimeStretchButton->setClickingTogglesState(true);
+    playTimeStretchButton->addListener(this);
+    
+    addAndMakeVisible (delayToggleButton = new TextButton ("delayToggleButton"));
+    delayToggleButton->setButtonText (TRANS("Delay"));
+    delayToggleButton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight);
+    delayToggleButton->setColour (TextButton::buttonColourId, Colour (0xff3b3b3b));
+    delayToggleButton->setColour (TextButton::buttonOnColourId, Colour (0xff797979));
+    delayToggleButton->setClickingTogglesState(true);
+    delayToggleButton->addListener(this);
+    
+    addAndMakeVisible (robotToggleButton = new TextButton ("robotToggleButton"));
+    robotToggleButton->setButtonText (TRANS("Robot"));
+    robotToggleButton->setConnectedEdges (Button::ConnectedOnLeft | Button::ConnectedOnRight);
+    robotToggleButton->setColour (TextButton::buttonColourId, Colour (0xff3b3b3b));
+    robotToggleButton->setColour (TextButton::buttonOnColourId, Colour (0xff797979));
+    robotToggleButton->setClickingTogglesState(true);
+    robotToggleButton->addListener(this);
+    
+    
     addAndMakeVisible(playBackRate = new Slider("playBackRate"));
-    playBackRate->setRange(1.0, 2.0);
+    playBackRate->setRange(0.7, 1.3);
     playBackRate->setValue(1.0, sendNotification);
     playBackRate->setColour (Slider::thumbColourId, Colours::red);
     playBackRate->addListener(this);
@@ -62,9 +96,17 @@ void MainContentComponent::resized()
     // This is called when the MainContentComponent is resized.
     // If you add any child components, this is where you should
     // update their positions.
-    audioToggleButton->setBounds(getWidth()/2 - 60, getHeight()/2 - 60, 120, 40);
-    audioFileToggleButton->setBounds(getWidth()/2 - 60, getHeight()/2 + 60, 120, 40);
-    playBackRate->setBounds(getWidth()/2 - 60, getHeight()/2 - 120, 120, 40);
+    audioToggleButton->setBounds(getWidth()/2 - 90, getHeight()/2 - 100, 60, 40);
+    audioFileToggleButton->setBounds(getWidth()/2 + 30, getHeight()/2 - 100, 60, 40);
+    
+    delayToggleButton->setBounds(getWidth()/2 - 90, getHeight()/2 , 60, 40);
+    robotToggleButton->setBounds(getWidth()/2 + 30, getHeight()/2, 60, 40);
+    
+    recordButton->setBounds(getWidth()/2 - 90, getHeight()/2 + 100, 60, 40);
+    playTimeStretchButton->setBounds(getWidth()/2 + 30, getHeight()/2 + 100, 60, 40);
+    
+    
+    playBackRate->setBounds(getWidth()/2 - 120, getHeight()/2 - 150, 240, 40);
 }
 
 void MainContentComponent::buttonClicked(Button *buttonThatWasClicked)
@@ -89,12 +131,25 @@ void MainContentComponent::buttonClicked(Button *buttonThatWasClicked)
         {
             audioEngine->startAudioPlayback();
         }
-        
+
         else
         {
             audioEngine->stopAudioPlayback();
         }
     }
+    
+    
+    if (buttonThatWasClicked == delayToggleButton)
+    {
+        audioEngine->toggleEffect(kDelay);
+    }
+    
+    if (buttonThatWasClicked == robotToggleButton)
+    {
+        audioEngine->toggleEffect(kRobot);
+    }
+    
+    
 }
 
 void MainContentComponent::sliderValueChanged(Slider* slider)
