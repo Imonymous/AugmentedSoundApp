@@ -149,6 +149,25 @@ void MainContentComponent::buttonClicked(Button *buttonThatWasClicked)
         audioEngine->toggleEffect(kRobot);
     }
     
+    if (buttonThatWasClicked == recordButton)
+    {
+        audioEngine->toggleRecord();
+    }
+    
+    if (buttonThatWasClicked == playTimeStretchButton)
+    {
+        
+        if (playTimeStretchButton->getToggleState())
+        {
+            audioEngine->startStretchedFile();
+        }
+        else
+        {
+            audioEngine->stopStretchedFile();
+        }
+        
+    }
+    
     
 }
 

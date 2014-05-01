@@ -5,6 +5,10 @@
               jucerVersion="3.1.0">
   <MAINGROUP id="xQeLHY" name="OSTnato">
     <GROUP id="{27808CB5-CA94-660B-BC3A-C011A6F19AE2}" name="Source">
+      <GROUP id="{B1FD964A-4113-FDD5-911E-9BC1FDD39F29}" name="Tests">
+        <FILE id="RqiLmI" name="Tests.cpp" compile="1" resource="0" file="Source/Tests.cpp"/>
+        <FILE id="vhYfRg" name="Tests.h" compile="0" resource="0" file="Source/Tests.h"/>
+      </GROUP>
       <GROUP id="{46648D5B-F050-4E17-BA49-B7C9C7E71EE1}" name="GUI">
         <FILE id="AiBWhG" name="MainComponent.cpp" compile="1" resource="0"
               file="Source/MainComponent.cpp"/>
@@ -12,6 +16,9 @@
         <FILE id="M0HwOB" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       </GROUP>
       <GROUP id="{61767F78-2EF0-DF04-378F-26A770F48635}" name="Audio">
+        <FILE id="W1iDbo" name="AudioRecorder.cpp" compile="1" resource="0"
+              file="Source/AudioRecorder.cpp"/>
+        <FILE id="WS4Htb" name="AudioRecorder.h" compile="0" resource="0" file="Source/AudioRecorder.h"/>
         <FILE id="UX6cHx" name="Robot.cpp" compile="1" resource="0" file="Source/Robot.cpp"/>
         <FILE id="biXyWD" name="Robot.h" compile="0" resource="0" file="Source/Robot.h"/>
         <FILE id="LdzG1z" name="ErrorDef.h" compile="0" resource="0" file="../../ProjectTemplate/SharedSources/incl/ErrorDef.h"/>

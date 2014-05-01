@@ -54,8 +54,6 @@ void AudioFileStream::stopPlaying()
     transportSource.stop();
 }
 
-
-
 void AudioFileStream::loadFileIntoTransport(String filePath)
 {
     File audioFile(filePath);

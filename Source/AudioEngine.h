@@ -15,14 +15,18 @@
 #include "Macros.h"
 #include "AudioStream.h"
 #include "AudioFileStream.h"
+#include "AudioRecorder.h"
+#include "TimeStretch.h"
 
 class AudioEngine
 {
     
 public:
     
+    CTimeStretch                        *m_pcTimeStretch;
+    
     AudioEngine();
-    ~AudioEngine();
+    virtual ~AudioEngine();
     
     void startLiveStreaming();
     void stopLiveStreaming();
@@ -34,12 +38,25 @@ public:
     void setPlayBackRate(double ratio);
     
     void toggleEffect(int iEffect);
+    void toggleRecord();
+    void startStretchedFile();
+    void stopStretchedFile();
     
 private:
+    
+    void doneRecording();
     
     ScopedPointer<AudioDeviceManager>   deviceManager;
     ScopedPointer<AudioStream>          audioStream;
     ScopedPointer<AudioFileStream>      fileStream;
+    ScopedPointer<AudioFileStream>      stretchFileStream;
+    ScopedPointer<AudioRecorder>        recorder;
+    ScopedPointer<AudioRecorder>        stretcher;
+    
+    AudioFormatManager                  formatManager;
+    
+    String                              inputRecordingFilepath;
+    String                              outputRecordingFilepath;
 
 };
 

@@ -58,7 +58,7 @@ Error_t CTimeStretch::initInstance(int iWindowLength, int iAnalysisStep, int iSy
     
     m_iWindowLength = iWindowLength;
     
-    m_fGrain = new float(iWindowLength);
+    m_fGrain = new float[iWindowLength];
     CUtil::setZero(m_fGrain, iWindowLength);
     
     return kNoError;
